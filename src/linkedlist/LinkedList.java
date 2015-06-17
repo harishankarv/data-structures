@@ -5,8 +5,9 @@ package linkedlist;
  */
 
 public class LinkedList<Item> {
+
     private int N;            //size of LinkedList
-    private Node<Item> head;  //head of LinkedList
+    public Node<Item> head;  //head of LinkedList
 
     //helper class
     private static class Node<Item>{
@@ -14,7 +15,7 @@ public class LinkedList<Item> {
         Node<Item> next;
     }
 
-    public LinkedList() 	{
+    public LinkedList(){
         head = null;
         N =0;
     }
@@ -28,16 +29,19 @@ public class LinkedList<Item> {
         return N;
     }
 
-    public void print(){
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
         for(Node<Item> temp = head; temp != null; temp = temp.next){
-            System.out.print(temp.data + "->");
+            stringBuilder.append(temp.data + "->");
         }
-        System.out.println("/");
+        stringBuilder.append("/");
+        return stringBuilder.toString();
     }
 
     /*
      *Add
      */
+
     public void addAtBeginning(Item data) {
         Node<Item> newHead = new Node<Item>();
         newHead.data = data;
@@ -98,6 +102,10 @@ public class LinkedList<Item> {
         currentNode.next = newNode;
     }
 
+    public void add(Item data){
+        addAtEnd(data);
+    }
+
     /*
      *Delete
      */
@@ -136,12 +144,82 @@ public class LinkedList<Item> {
 
         Node<Item> currentNode = head;
         Node<Item> previousNode = head;
-        Node<Item> nextNode = head;
+        Node<Item> nextNode = head.next;
+
         for(int i = 1; i<index ; i++){
             previousNode = currentNode;
             currentNode = currentNode.next;
             nextNode = currentNode.next;
         }
         previousNode.next = nextNode;
+        N--;
+    }
+
+    //deletes the first occurence of data
+    public void delete(Item data){
+        if (isEmpty()){
+            return;
+        }
+        if(head.data == data){
+            head = head.next;
+            N--;
+            return;
+        }
+
+        Node<Item> currentNode = head;
+        Node<Item> previousNode = head;
+        Node<Item> nextNode = head.next;
+
+        while(currentNode.next != null) {
+            if(currentNode.data == data){
+                previousNode.next = nextNode;
+                N--;
+                break;
+            }
+
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+            nextNode = currentNode.next;
+        }
+    }
+
+    public static void main(String[] args)	{
+
+        LinkedList<Integer> myLL = new LinkedList<>();
+
+        //---------basic tests---------
+        myLL.addAtBeginning(1);
+        myLL.addAtBeginning(2);
+        myLL.addAtBeginning(3);
+        myLL.addAtBeginning(4);
+        myLL.addAtBeginning(5);
+        myLL.addAtBeginning(1);
+        myLL.addAtBeginning(2);
+        myLL.addAtBeginning(3);
+        myLL.addAtBeginning(4);
+        myLL.addAtBeginning(5);
+        myLL.addAtEnd(6);
+        myLL.addAtEnd(7);
+        myLL.addAtEnd(8);
+        myLL.addAtEnd(9);
+        myLL.addAtEnd(10);
+        System.out.println(myLL.toString());
+
+        myLL.deleteAtBeginning();
+        myLL.deleteAtBeginning();
+        myLL.deleteAtEnd();
+        myLL.deleteAtEnd();
+        System.out.println(myLL.toString());
+
+        myLL.addAtIndex(1, 11);
+        myLL.addAtIndex(1, 12);
+        System.out.println(myLL.toString());
+
+        myLL.deleteAtIndex(2);
+        System.out.println(myLL.toString());
+
+        myLL.delete(3);
+        System.out.println(myLL.toString());
+
     }
 }
