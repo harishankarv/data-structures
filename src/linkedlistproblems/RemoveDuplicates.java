@@ -29,15 +29,10 @@ public class RemoveDuplicates {
 
     public static void main(String[] args){
 
+
         Node head = new Node(1);
-        head.addAtEnd(2);
-        head.addAtEnd(2);
-        head.addAtEnd(2);
-        head.addAtEnd(3);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
+        head.addAtEnd(2);head.addAtEnd(2);head.addAtEnd(2);
+        head.addAtEnd(3);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);
         head.print();
         head = RemoveDuplicates.removeDuplicates(head);
         head.print();

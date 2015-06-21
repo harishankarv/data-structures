@@ -27,17 +27,11 @@ public class RemoveDuplicatesWithoutBuffer {
 
     public static void main(String[] args){
 
-        Node head = new Node(1);
-        head.addAtEnd(2);
-        head.addAtEnd(2);
-        head.addAtEnd(2);
-        head.addAtEnd(3);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
-        head.addAtEnd(4);
-        head.print();
 
+        Node head = new Node(1);
+        head.addAtEnd(2);head.addAtEnd(2);head.addAtEnd(2);
+        head.addAtEnd(3);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);
+        head.print();
         head = removeDuplicatesWithoutBuffer(head);
         head.print();
     }
