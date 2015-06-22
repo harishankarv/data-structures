@@ -15,14 +15,15 @@ public class RemoveKthLastNode {
             N++;
         }
 
-        if(N==k){
+        if(N == k){
             return head.next;
         }
 
         currentNode = head;
         Node previousNode = head;
         Node nextNode = null;
-        int i =0;
+        int i = 0;
+
         while(i < N - k){
             previousNode = currentNode;
             currentNode = currentNode.next;
@@ -35,9 +36,7 @@ public class RemoveKthLastNode {
 
     public static void main(String[] args){
 
-        Node head = new Node(1);
-        head.addAtEnd(2);head.addAtEnd(2);head.addAtEnd(2);
-        head.addAtEnd(3);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);
+        Node head = Node.createLinkedList();
         head = removeKthLastNode(head, 1);
         head.print();
     }

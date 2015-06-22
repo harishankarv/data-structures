@@ -26,15 +26,37 @@ public class RemoveDuplicates {
       return head;
     }
 
+    //remove duplicates and return head without using a temporary buffer
+    public static Node removeDuplicatesWithoutBuffer(Node head){
+        Node currentPrimaryNode = head;
 
-    public static void main(String[] args){
+        while(currentPrimaryNode !=null) {
+            Node currentSecondaryNode = currentPrimaryNode.next;
+            Node previousSecondaryNode = currentPrimaryNode;
+            while (currentSecondaryNode != null) {
+                if (currentSecondaryNode.data == currentPrimaryNode.data) {
+                    previousSecondaryNode.next = currentSecondaryNode.next;
+                }
+                previousSecondaryNode = currentSecondaryNode;
+                currentSecondaryNode = currentSecondaryNode.next;
+            }
+            currentPrimaryNode = currentPrimaryNode.next;
+        }
+
+        return head;
+    }
 
 
-        Node head = new Node(1);
-        head.addAtEnd(2);head.addAtEnd(2);head.addAtEnd(2);
-        head.addAtEnd(3);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);head.addAtEnd(4);
+    public static void main(String[] args) {
+
+        Node head = Node.createLinkedList();
         head.print();
-        head = RemoveDuplicates.removeDuplicates(head);
+        head = removeDuplicates(head);
+        head.print();
+
+        head = Node.createLinkedList();
+        head.print();
+        head = removeDuplicatesWithoutBuffer(head);
         head.print();
     }
 }

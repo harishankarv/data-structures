@@ -33,4 +33,19 @@ package linkedlistproblems;
         System.out.println("//");
     }
 
+    public static Node createLinkedList(){
+
+        Node head = new Node(1);
+        head.addAtEnd(2);
+        head.addAtEnd(2);
+        head.addAtEnd(2);
+        head.addAtEnd(3);
+        head.addAtEnd(4);
+        head.addAtEnd(4);
+        head.addAtEnd(4);
+        head.addAtEnd(4);
+
+        return head;
+    }
+
   }
