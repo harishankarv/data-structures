@@ -36,14 +36,15 @@ package linkedlistproblems;
     public static Node createLinkedList(){
 
         Node head = new Node(1);
-        head.addAtEnd(2);
-        head.addAtEnd(2);
+        head.addAtEnd(4);
         head.addAtEnd(2);
         head.addAtEnd(3);
         head.addAtEnd(4);
         head.addAtEnd(4);
+        head.addAtEnd(2);
+        head.addAtEnd(2);
         head.addAtEnd(4);
-        head.addAtEnd(4);
+        head.addAtEnd(3);
 
         return head;
     }
