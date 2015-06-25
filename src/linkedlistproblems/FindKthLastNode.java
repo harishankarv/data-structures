@@ -26,15 +26,16 @@ public class FindKthLastNode {
 
     //------------------------------------------------------------------------------------------------------------------
 
+    /* a trivial solution, just print the Node,
+     * don't return it.
+     */
 
-    /*
-    //just print the Node, do not return it.
-    public static int findKthLastNodeRecursive_T(Node head, int k) {
+    public static int findKthLastNodeRecursive_1(Node head, int k) {
 
         if (head == null){
             return 0;
         }
-        int value = findKthLastNodeRecursive_T(head.next , k) + 1;
+        int value = findKthLastNodeRecursive_1(head.next, k) + 1;
         if ( value == k){
             System.out.println(head.data);
         }
@@ -42,9 +43,12 @@ public class FindKthLastNode {
 
     }
 
-    */
+    //------------------------------------------------------------------------------------------------------------------
 
-    //based on the above.
+    /*
+     *  based on the above.
+     */
+
     static class IntegerWrapper{
         int value;
 
@@ -53,7 +57,7 @@ public class FindKthLastNode {
         }
     }
 
-    public static Node findKthLastNodeRecursive(Node head, int k){
+    public static Node findKthLastNodeRecursive_2(Node head, int k){
         return findKthLastNodeRecursiveHelper(head,k, new IntegerWrapper(0));
     }
 
@@ -81,8 +85,10 @@ public class FindKthLastNode {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    //alternate solution
-    /*
+    /*  alternate solution
+     *  uses a wrapper for the whole node, rather than just an Integer.
+     */
+
     static class NodeWrapper{
         Node node;
         int indexFromEnd; //indexFromEnd in linked list from the end
@@ -93,7 +99,7 @@ public class FindKthLastNode {
         }
     }
 
-    public static Node findKthLastNodeRecursive_2(Node head, int k){
+    public static Node findKthLastNodeRecursive_3(Node head, int k){
         //need to pass return a Node and a counter
         NodeWrapper kthLastNode = findKthLastNodeRecursiveHelper(new NodeWrapper(head, -1), k);
         return kthLastNode.node;
@@ -114,7 +120,8 @@ public class FindKthLastNode {
             return headNodeWrapper;
         }
     }
-    */
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public static void main(String[] args){
 
@@ -125,8 +132,19 @@ public class FindKthLastNode {
 
         head = Node.createLinkedList();
         head.print();
-        head = findKthLastNodeRecursive(head, 6);
+        System.out.println(findKthLastNodeRecursive_1(head, 6));
         head.print();
+
+        head = Node.createLinkedList();
+        head.print();
+        head = findKthLastNodeRecursive_2(head, 6);
+        head.print();
+
+        head = Node.createLinkedList();
+        head.print();
+        head = findKthLastNodeRecursive_3(head, 6);
+        head.print();
+
 
     }
 

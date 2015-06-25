@@ -7,7 +7,12 @@ import java.util.HashSet;
  */
 public class RemoveDuplicates {
 
-    //remove duplicates and return head
+    //------------------------------------------------------------------------------------------------------------------
+
+    /*
+     *  remove duplicates and return head
+     */
+
     public static Node removeDuplicates(Node head) {
 
         HashSet<Integer> set = new HashSet<>();
@@ -26,7 +31,12 @@ public class RemoveDuplicates {
       return head;
     }
 
-    //remove duplicates and return head without using a temporary buffer
+    //------------------------------------------------------------------------------------------------------------------
+
+    /*
+     *  remove duplicates and return head without using a temporary buffer
+     */
+
     public static Node removeDuplicatesWithoutBuffer(Node head){
         Node currentPrimaryNode = head;
 
@@ -46,6 +56,7 @@ public class RemoveDuplicates {
         return head;
     }
 
+    //------------------------------------------------------------------------------------------------------------------
 
     public static void main(String[] args) {
 
