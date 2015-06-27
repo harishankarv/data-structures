@@ -11,7 +11,16 @@ public class CircularLinkedList {
         Node slowNode = head;
 
         /*
-         *  use a fast pointer and a slow pointer
+         *  use a fast pointer and a slow pointer,
+         *  the fast pointer traverses the list twice as fast.
+         *  the node they meet at is at the same distance from
+         *  the start of the loop as is the head node.
+         */
+
+        /*
+         * Note: cannot use
+         * while(slowNode != fastNode)
+         * here, as we may NOT have a loop as well.
          */
 
         while(slowNode.next!= null){
@@ -23,6 +32,10 @@ public class CircularLinkedList {
             }
         }
 
+
+        /*
+         * No loop was detected
+         */
 
         if(slowNode.next == null){
             return null;
