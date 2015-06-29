@@ -5,8 +5,9 @@ package stack;
  */
 
 /*
- * An implementation of the stack data structure using the linked list.
+ * a LIFO Stack which internally uses a linked list.
  */
+
 public class Stack<Item> {
 
     private int N;
