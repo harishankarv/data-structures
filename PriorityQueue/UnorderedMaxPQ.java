@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
  * Unordered Maximum Priority Queue.
  * Maintains a resizable array of elements
  * insert(): O(1) time 
- * delMax(): iterates through the array, so takes O(N) time
+ * delMax(): O(N) time
  */
 public class UnorderedMaxPQ<Key extends Comparable<Key>> {
 
