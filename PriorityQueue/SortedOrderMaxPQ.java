@@ -6,13 +6,13 @@ import java.util.NoSuchElementException;
  * insert(): O(N) worst case time. 
  * delMax(): return the last item of array. O(1) time.
  */
-public class OrderedMaxPQ<Key extends Comparable<Key>> {
+public class SortedOrderMaxPQ<Key extends Comparable<Key>> {
 
 	private Key[] pq; // pq[i] = ith element on pq
 	private int N; // number of items on priority queue.
 	// (N points to LAST + 1 element in PQ, whe re next item is to be inserted)
 
-	public OrderedMaxPQ() {
+	public SortedOrderMaxPQ() {
 		pq = (Key[]) new Comparable[2];
 		N = 0;
 	}
@@ -22,7 +22,8 @@ public class OrderedMaxPQ<Key extends Comparable<Key>> {
 	}
 
 	/*
-	 * shifts all items greater than key to be inserted to the right.
+	 * shift all items greater than key to be inserted to the right.
+	 * break out of loop and insert key.
 	 */
 	public void insert(Key x) {
 		if (N == pq.length) {
@@ -73,7 +74,7 @@ public class OrderedMaxPQ<Key extends Comparable<Key>> {
 	}
 
 	public static void main(String[] args) {
-		OrderedMaxPQ<String> queue = new OrderedMaxPQ<String>();
+		SortedOrderMaxPQ<String> queue = new SortedOrderMaxPQ<String>();
 		queue.insert("P");
 		queue.insert("R");
 		queue.insert("I");
