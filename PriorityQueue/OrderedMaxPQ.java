@@ -1,18 +1,18 @@
 import java.util.NoSuchElementException;
 
 /*
- * Unordered Maximum Priority Queue.
+ * Ordered Maximum Priority Queue.
  * Maintains a resizable array of elements
- * insert(): O(1) time 
- * delMax(): iterates through the array, so takes O(N) time
+ * insert(): O(N) worst case time. 
+ * delMax(): return the last item of array. O(1) time.
  */
-public class UnorderedMaxPQ<Key extends Comparable<Key>> {
+public class OrderedMaxPQ<Key extends Comparable<Key>> {
 
 	private Key[] pq; // pq[i] = ith element on pq
 	private int N; // number of items on priority queue.
-	// (N points to LAST + 1 element in PQ, where next item is to be inserted)
+	// (N points to LAST + 1 element in PQ, whe re next item is to be inserted)
 
-	public UnorderedMaxPQ() {
+	public OrderedMaxPQ() {
 		pq = (Key[]) new Comparable[2];
 		N = 0;
 	}
@@ -21,29 +21,29 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
 		return N == 0;
 	}
 
+	/*
+	 * shifts all items greater than key to be inserted to the right.
+	 */
 	public void insert(Key x) {
 		if (N == pq.length) {
 			resize(2 * pq.length);
 		}
-		pq[N++] = x;
+		int i = N - 1;
+		while (i >= 0 && less(x, pq[i])) {
+			pq[i + 1] = pq[i];
+			i--;
+		}
+		pq[i + 1] = x;
+		N++;
 	}
 
 	/*
-	 * iterate through the array to get the maximum, swap with the last element,
-	 * and delete the last element.
+	 * remove the last element and resize if necessary
 	 */
 	public Key delMax() {
 		if (isEmpty())
 			throw new NoSuchElementException("underflow");
 
-		int max = 0;
-		for (int i = 1; i < N; i++) {
-			if (less(max, i)) {
-				max = i;
-			}
-		}
-
-		swap(max, N - 1);
 		Key k = pq[N - 1];
 		pq[N - 1] = null;
 		N--;
@@ -55,8 +55,8 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
 	}
 
 	// is A strictly less than B
-	private boolean less(int a, int b) {
-		return (pq[a].compareTo(pq[b]) < 0);
+	private boolean less(Key a, Key b) {
+		return a.compareTo(b) < 0;
 	}
 
 	private void swap(int i, int j) {
@@ -73,7 +73,7 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
 	}
 
 	public static void main(String[] args) {
-		UnorderedMaxPQ<String> queue = new UnorderedMaxPQ<String>();
+		OrderedMaxPQ<String> queue = new OrderedMaxPQ<String>();
 		queue.insert("P");
 		queue.insert("R");
 		queue.insert("I");

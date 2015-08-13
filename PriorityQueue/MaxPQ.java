@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 /*
- * Ordered Maximum Priority Queue using a binary heap.
+ * Heap-ordered Maximum Priority Queue using a binary heap.
  * Array is indexed starting with 1 to simplify parent and child calculations
  * insert(): O(log(N)) amortized time 
  * delMax(): O(log(N)) amortized time
