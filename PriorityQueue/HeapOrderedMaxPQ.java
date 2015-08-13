@@ -8,18 +8,18 @@ import java.util.NoSuchElementException;
  */
 
 
-public class MaxPQ<Key extends Comparable<Key>> {
+public class HeapOrderedMaxPQ<Key extends Comparable<Key>> {
 	
 	private Key[] pq; // store items at indices 1 to N
 	private int N; // number of items on priority queue.
 	// (N points to LAST element in PQ, where last item was inserted)
 
-	public MaxPQ(int capacity) {
+	public HeapOrderedMaxPQ(int capacity) {
 		pq = (Key[]) new Comparable[capacity];
 		N = 0;
 	}
 
-	public MaxPQ() {
+	public HeapOrderedMaxPQ() {
 		this(2);
 	}
 
@@ -138,7 +138,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
 	 * Test client
 	 */
 	public static void main(String[] args) {
-		MaxPQ<String> queue = new MaxPQ<String>();
+		HeapOrderedMaxPQ<String> queue = new HeapOrderedMaxPQ<String>();
 		// P Q E X A M P L E
 		queue.insert("P");
 		queue.insert("Q");
