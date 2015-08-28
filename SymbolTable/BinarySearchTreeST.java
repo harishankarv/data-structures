@@ -38,26 +38,25 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 	}
 
 	public Value get(Key key) {
-		Node x = get(root, key);
-		if (x == null)
-			return null;
-		else
-			return x.val;
+		return get(root, key);
 	}
 
-	private Node get(Node x, Key key) {
-		if (key.compareTo(x.key) == 0)
-			return x;
-		else if (key.compareTo(x.key) < 0)
+	private Value get(Node x, Key key) {
+		if (x == null)
+			return null;
+		if (key.compareTo(x.key) < 0)
 			return get(x.left, key);
-		else
+		else if (key.compareTo(x.key) > 0)
 			return get(x.right, key);
+		else
+			return x.val;
 	}
 
 	public void delete(Key key) {
 		delete(root, key);
 	}
 
+	// hibbard deletion
 	private Node delete(Node x, Key key) {
 		if (x == null)
 			return null;
@@ -67,7 +66,7 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 		else if (key.compareTo(x.key) > 0)
 			x.right = delete(x.right, key);
 		else {
-			// now x points to the key to delete.
+			// now x points to the Node to delete.
 			if (x.right == null && x.left == null)
 				return null;
 			if (x.right == null && x.left != null)
@@ -75,20 +74,15 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 			if (x.right != null && x.left == null)
 				return x.right;
 
-			/*
-			 * Node y = min(x.right); x.key = y.key; x.val = y.val;
-			 * deleteMin(x.right);
-			 */
-
-			Node t = x;
-			x = min(t.right);
-			x.right = deleteMin(t.right);
-			x.left = t.left;
+			Node y = min(x.right);
+			x.key = y.key;
+			x.val = y.val;
+			x.right = deleteMin(x.right);
 		}
 		return x;
 	}
 
-	private void deleteMin() {
+	public void deleteMin() {
 		root = deleteMin(root);
 	}
 
@@ -99,7 +93,7 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 		return x;
 	}
 
-	private Node min() {
+	public Node min() {
 		return min(root);
 	}
 
@@ -177,22 +171,29 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 	public static void main(String[] args) {
 		BinarySearchTreeST<String, Integer> bst = new BinarySearchTreeST<>();
 		bst.put("S", 1);
-		bst.put("E", 1);
-		bst.put("A", 1);
-		bst.put("R", 1);
-		bst.put("C", 1);
-		bst.put("H", 1);
-		bst.put("E", 1);
-		bst.put("X", 1);
-		bst.put("A", 1);
-		bst.put("M", 1);
-		bst.put("P", 1);
-		bst.put("L", 1);
-		bst.put("E", 1);
+		bst.put("E", 2);
+		bst.put("A", 3);
+		bst.put("R", 4);
+		bst.put("C", 5);
+		bst.put("H", 6);
+		bst.put("E", 7);
+		bst.put("X", 8);
+		bst.put("A", 9);
+		bst.put("M", 10);
+		bst.put("P", 11);
+		bst.put("L", 12);
+		bst.put("E", 13);
+		for (String s : bst.keys())
+			System.out.print(s + "," + bst.get(s) + "  ");
+
+		System.out.println();
+
 		bst.delete("E");
-		for (String s : bst.keys()) {
-			System.out.println(s + " " + bst.get(s));
-		}
+
+		for (String s : bst.keys())
+			System.out.print(s + "," + bst.get(s) + "  ");
+
+		System.out.println("\n" + bst.get("A"));
 
 	}
 }
