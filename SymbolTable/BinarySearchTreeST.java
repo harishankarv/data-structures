@@ -170,30 +170,13 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 
 	public static void main(String[] args) {
 		BinarySearchTreeST<String, Integer> bst = new BinarySearchTreeST<>();
-		bst.put("S", 1);
-		bst.put("E", 2);
-		bst.put("A", 3);
-		bst.put("R", 4);
-		bst.put("C", 5);
-		bst.put("H", 6);
-		bst.put("E", 7);
-		bst.put("X", 8);
-		bst.put("A", 9);
-		bst.put("M", 10);
-		bst.put("P", 11);
-		bst.put("L", 12);
-		bst.put("E", 13);
+		for (int i = 0; !StdIn.isEmpty(); i++) {
+			String key = StdIn.readString();
+			bst.put(key, i);
+		}
+
+		// print keys
 		for (String s : bst.keys())
-			System.out.print(s + "," + bst.get(s) + "  ");
-
-		System.out.println();
-
-		bst.delete("E");
-
-		for (String s : bst.keys())
-			System.out.print(s + "," + bst.get(s) + "  ");
-
-		System.out.println("\n" + bst.get("A"));
-
+			StdOut.println(s + " " + bst.get(s));
 	}
 }
