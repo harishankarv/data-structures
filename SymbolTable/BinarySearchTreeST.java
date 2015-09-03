@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements SymbolTable<Key, Value> {
 
+	enum traversal {
+		IN, PRE, POST, LEVEL;
+	}
+
 	private Node root;
 
 	private class Node {
@@ -56,7 +60,13 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 		delete(root, key);
 	}
 
-	// hibbard deletion
+	/*
+	 * hibbard deletion: For the node to delete (x), If both children are null,
+	 * return null to parent. If one child is null, return the other child to
+	 * parent. If both children are not null: 1. Find minimum in right subtree
+	 * 2. Change the <k, v> of x to the <k, v> of the min. 3. delete the minimum
+	 * in the right subtree. return the node with changed <k,v> to parent.
+	 */
 	private Node delete(Node x, Key key) {
 		if (x == null)
 			return null;
@@ -120,11 +130,14 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 	}
 
 	private Node floor(Node x, Key key) {
-		if (key.compareTo(x.key) == 0)
+		if(x == null)
+			return null;
+		else if (key.compareTo(x.key) == 0)
 			return x;
 		else if (key.compareTo(x.key) < 0)
 			return floor(x.left, key);
-		else {
+		else{
+
 			Node y = floor(x.right, key);
 			if (y == null)
 				return x;
@@ -141,7 +154,9 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 	}
 
 	private Node ceil(Node x, Key key) {
-		if (key.compareTo(x.key) == 0)
+		if(key == null)
+			return null;
+		else if (key.compareTo(x.key) == 0)
 			return x;
 		else if (key.compareTo(x.key) > 0)
 			return ceil(x.right, key);
@@ -160,23 +175,84 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 		return a;
 	}
 
+	public Iterable<Key> keys(traversal tr) {
+		ArrayList<Key> a = new ArrayList<>();
+		switch (tr) {
+		case IN:
+			inorder(a, root);
+			break;
+		case PRE:
+			preorder(a, root);
+			break;
+		case POST:
+			postorder(a, root);
+			break;
+		case LEVEL:
+			levelorder(a);
+			break;
+		default:
+			inorder(a, root);
+		}
+		return a;
+	}
+
 	private void inorder(ArrayList<Key> a, Node x) {
-		if (x.left != null)
-			inorder(a, x.left);
+		if (x == null)
+			return;
+		inorder(a, x.left);
 		a.add(x.key);
-		if (x.right != null)
-			inorder(a, x.right);
+		inorder(a, x.right);
+	}
+
+	private void preorder(ArrayList<Key> a, Node x) {
+		if (x == null)
+			return;
+		a.add(x.key);
+		preorder(a, x.left);
+		preorder(a, x.right);
+	}
+
+	private void postorder(ArrayList<Key> a, Node x) {
+		if (x == null)
+			return;
+		postorder(a, x.left);
+		postorder(a, x.right);
+		a.add(x.key);
+	}
+
+	private void levelorder(ArrayList<Key> a) {
+		Queue<Node> q = new Queue<>();
+		while (!q.isEmpty()) {
+			q.enqueue(root);
+			Node x = q.dequeue();
+			a.add(x.key);
+			if (x.left != null)
+				q.enqueue(x.left);
+			if (x.right != null)
+				q.enqueue(x.right);
+		}
 	}
 
 	public static void main(String[] args) {
+
+		String test = "S E A R C H E X A M P L E";
+		String[] keys = test.split(" ");
+		int N = keys.length;
 		BinarySearchTreeST<String, Integer> bst = new BinarySearchTreeST<>();
-		for (int i = 0; !StdIn.isEmpty(); i++) {
-			String key = StdIn.readString();
-			bst.put(key, i);
-		}
+		for (int i = 0; i < N; i++)
+			bst.put(keys[i], i);
 
 		// print keys
-		for (String s : bst.keys())
+		for (String s : bst.keys(traversal.IN))
+			StdOut.println(s + " " + bst.get(s));
+		StdOut.println();
+		for (String s : bst.keys(traversal.PRE))
+			StdOut.println(s + " " + bst.get(s));
+		StdOut.println();
+		for (String s : bst.keys(traversal.POST))
+			StdOut.println(s + " " + bst.get(s));
+		StdOut.println();
+		for (String s : bst.keys(traversal.LEVEL))
 			StdOut.println(s + " " + bst.get(s));
 	}
 }

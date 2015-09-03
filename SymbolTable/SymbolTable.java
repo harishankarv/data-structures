@@ -1,6 +1,7 @@
 
 public interface SymbolTable<Key, Value> {
 
+
 	void put(Key key, Value val);// put key-value pair into the table (remove
 									// key from table if value is null)
 

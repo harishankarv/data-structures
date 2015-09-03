@@ -1,0 +1,43 @@
+	public void put(Key key, Value val) {
+		if(root == null) {
+			root = new Node(key, val);
+			return;
+		}
+		Node temp = root;
+		while (true) {
+			if (key.compareTo(temp.key) < 0) {
+				if (temp.left != null) 
+					temp = temp.left;
+				else {
+					temp.left = new Node(key, val);
+					break;
+				}
+			}
+
+			else if (key.compareTo(temp.key) > 0) {
+				if (temp.right != null) 
+					temp = temp.right;
+				else {
+					temp.right = new Node(key, val);
+					break;
+				}
+			}
+			else {
+				temp.val = val;
+				break;
+			}
+		}
+	}
+	
+		public Value get(Key key) {
+		Node temp = root;
+		while (temp != null) {
+			if (key.compareTo(temp.key) < 0)
+				temp = temp.left;
+			else if (key.compareTo(temp.key) > 0)
+				temp = temp.right;
+			else
+				return temp.val;
+		}
+		return null;
+	}

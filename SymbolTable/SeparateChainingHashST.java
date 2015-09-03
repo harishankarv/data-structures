@@ -7,7 +7,7 @@
  */
 public class SeparateChainingHashST<Key, Value> implements SymbolTable<Key, Value> {
 
-	private int M = 97;
+	private int M = 5;
 	private int N;
 	private Node[] st = new Node[M];
 
@@ -30,7 +30,7 @@ public class SeparateChainingHashST<Key, Value> implements SymbolTable<Key, Valu
 
 	/* possible 1-in-a-billion bug */
 	private int hash(Key key) {
-		return Math.abs(key.hashCode() % M);
+		return Math.abs(key.hashCode()) % M;
 	}
 
 	// node is inserted to the start everytime
@@ -123,6 +123,8 @@ public class SeparateChainingHashST<Key, Value> implements SymbolTable<Key, Valu
 
 	public static void main(String[] args) {
 
+		
+		
 		String filename = args[0];
 		In in = new In(filename);
 
