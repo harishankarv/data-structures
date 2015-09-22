@@ -4,11 +4,13 @@
  * Requires that Key overrides the equals() and hashCode() methods.
  * Uses hashCode to find index into the array. If two Keys hash to the same index, 
  * another Node is appended to the existing node. 
+ * This is how HashMap is implemented in java
  */
+
 public class SeparateChainingHashST<Key, Value> implements SymbolTable<Key, Value> {
 
-	private int M = 5;
-	private int N;
+	private int M = 5;  //start with a symbol table of size 5
+	private int N;      //number of elements in the symbol table
 	private Node[] st = new Node[M];
 
 	public static class Node {
@@ -123,8 +125,6 @@ public class SeparateChainingHashST<Key, Value> implements SymbolTable<Key, Valu
 
 	public static void main(String[] args) {
 
-		
-		
 		String filename = args[0];
 		In in = new In(filename);
 

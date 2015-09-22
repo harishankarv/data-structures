@@ -7,8 +7,7 @@ import java.util.NoSuchElementException;
  * delMax(): O(log(N)) amortized time
  */
 
-
-public class HeapOrderedMaxPQ<Key extends Comparable<Key>> {
+public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key> {
 	
 	private Key[] pq; // store items at indices 1 to N
 	private int N; // number of items on priority queue.

@@ -222,8 +222,8 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 
 	private void levelorder(ArrayList<Key> a) {
 		Queue<Node> q = new Queue<>();
+		q.enqueue(root);
 		while (!q.isEmpty()) {
-			q.enqueue(root);
 			Node x = q.dequeue();
 			a.add(x.key);
 			if (x.left != null)
@@ -232,7 +232,7 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements S
 				q.enqueue(x.right);
 		}
 	}
-
+	
 	public static void main(String[] args) {
 
 		String test = "S E A R C H E X A M P L E";

@@ -1,7 +1,3 @@
-/**
- * Created by Harishankar on 27-06-2015.
- */
-
 /*
  * a LIFO Stack which internally uses a linked list.
  */
