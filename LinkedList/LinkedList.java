@@ -1,15 +1,11 @@
 
-/**
- * Created by Harishankar on 16-06-2015.
- */
-
 public class LinkedList<Item> {
 
 	private int N; // size of LinkedList
 	public Node<Item> head; // head of LinkedList
 
 	// helper class
-	private static class Node<Item> {
+	private class Node<Item> {
 		Item data;
 		Node<Item> next;
 	}
@@ -21,7 +17,9 @@ public class LinkedList<Item> {
 
 	// Initialize empty LinkedList
 	public boolean isEmpty() {
-		return (head == null);
+	Node<Item> asdf= new Node<>();
+	    return (head == null);
+
 	}
 
 	public int size() {
