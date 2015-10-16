@@ -41,6 +41,7 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 		}
 		pq[++N] = x;
 		swim(N);
+		//System.out.println(Arrays.toString(pq));
 	}
 
 	public Key max() {
@@ -49,7 +50,7 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 
 	/*
 	 * Delete maximum element and return it. Swap first (and largest) element
-	 * with the last element. Remove last from the queue. May vilolate heap
+	 * with the last element and remove last from the queue. May violate heap
 	 * order (parent becomes greater than child), so call sink(). (N + 1 due to
 	 * 1-based indexing)
 	 */
@@ -70,7 +71,7 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 	}
 
 	/*
-	 * child's key becomes larger key than its parent's key. Exchange key in
+	 * child's key becomes larger than its parent. Exchange key in
 	 * child with key in parent. Repeat until heap order restored.
 	 */
 	private void swim(int k) {
@@ -80,15 +81,12 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 		while (child > 1 && less(parent, child)) {
 			swap(parent, child);
 			child = parent;
-			if (child <= 1) {
-				break;
-			}
 			parent = child / 2;
 		}
 	}
 
 	/*
-	 * parent's key becomes larger key than its parent's key. Exchange key in
+	 * parent's key becomes greater key than its child's key. Exchange key in
 	 * child with key in parent. Repeat until heap order restored.
 	 * note: child < N: implies one more child exists.
 	 * note: parent * 2 <= N: implies at least one child exists.
@@ -104,9 +102,6 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 		while (2 * parent <= N && less(parent, child)) {
 			swap(parent, child);
 			parent = child;
-			if (parent * 2 > N) {
-				break;
-			}
 			child = 2 * parent; // choose the greater of the two children for swap.
 			if (child < N && less(child, child + 1))
 				child++;
@@ -142,15 +137,12 @@ public class HeapOrderedMaxPQ<Key extends Comparable <Key>> implements MaxPQ<Key
 		queue.insert("P");
 		queue.insert("Q");
 		queue.insert("E");
-		System.out.print(queue.delMax() + " ");
 		queue.insert("X");
 		queue.insert("A");
 		queue.insert("M");
-		System.out.print(queue.delMax() + " ");
 		queue.insert("P");
 		queue.insert("L");
 		queue.insert("E");
-		System.out.print(queue.delMax() + " ");
 		System.out.println("(size: " + queue.size() + ")");
 	}
 }
