@@ -1,4 +1,4 @@
-
+ 
 public class BreadthFirstSearch implements PathSearch{
 
     private boolean[] marked;
@@ -44,6 +44,7 @@ public class BreadthFirstSearch implements PathSearch{
 	stack.push(s);
 	return stack;
     } 	
+    
     
     
     	

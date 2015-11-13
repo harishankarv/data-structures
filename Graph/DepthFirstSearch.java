@@ -12,8 +12,24 @@ public class DepthFirstSearch implements PathSearch {
 	this.s = s;
 	edgeTo = new int[G.V()];
 	marked = new boolean[G.V()];
-	dfs(G, s);
+	dfsIterative(G, s);
     }
+    
+    private void dfsNonRecursive(Graph G, int s) {
+	    Stack<Integer> stack = new Stack<Integer>();
+	    stack.push(s);
+	    while (!stack.isEmpty()) {
+	        int v = stack.pop();
+	        if (!marked[v]) {
+	            marked[v] = true;
+	            for (int w : G.adj(v)) {
+	                edgeTo[w] = v;
+	                stack.push(w);
+	            }
+	        }
+	    }
+	}
+    
 
     private void dfsIterative(Graph G, int s) {
 	Stack<Integer> stack = new Stack<>();
