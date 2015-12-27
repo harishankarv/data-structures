@@ -34,21 +34,21 @@ public class Heap {
 		if (child < N && less(a, child, child + 1))
 			child++;
 
-		while (2 * parent <= N && less(parent, child)) {
+		while (2 * parent <= N && less(a, parent, child)) {
 			swap(a, parent, child);
 			parent = child;
 			if (parent * 2 > N) {
 				break;
 			}
 			child = 2 * parent;
-			if (child < N && less(child, child + 1))
+			if (child < N && less(a, child, child + 1))
 				child++;
 		}
 	}
 
 	// is A strictly less than B
-	private static boolean less(Comparable[] a, int a, int b) {
-		return a.compareTo(b) < 0;
+	private static boolean less(Comparable[] a, int i, int j) {
+		return a[i].compareTo(a[j]) < 0;
 	}
 
 	private static void swap(Comparable[] a, int i, int j) {

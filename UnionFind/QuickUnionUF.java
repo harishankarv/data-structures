@@ -41,6 +41,6 @@ public class QuickUnionUF implements UnionFind{
 	    uf.union(6, 1);
 	    uf.union(1, 0);
 	    uf.union(6, 7);
-	    StdOut.println(Arrays.toString(uf.id));
+	    System.out.println(Arrays.toString(uf.id));
 	}
 }
